@@ -1,0 +1,25 @@
+
+= Projet d'étude IHM avec Java
+
+== Dépendances du projet
+* https://www.oracle.com/fr/java/technologies/downloads/#java21[jdk 21.0.8]
+* https://gluonhq.com/products/javafx/[openjfx-21.0.8]
+
+== Struture du projet
+[source]
+----
+bibliotheque/
+├── .vscode/
+│   └── launch.json
+|   └── setting.json
+├── bin/
+├── lib/
+├── rssrc/
+|   └── images/
+|   └── styles/
+├── src/
+|── storages/
+├── .gitignore
+├── diagramme_de_cas_utilisation.drawio.pdf
+└── README.adoc
+----

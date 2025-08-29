@@ -1,0 +1,50 @@
+.root
+{
+    -fx-background-color: #ddd3ba;
+}
+
+.userloginshadow
+{
+    -fx-background-color: white ;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
+}
+
+#userlogin, .userloginshadow
+{
+    -fx-background-radius: 10px ;
+    -fx-border-radius: 10px ;
+}
+
+#userlogin
+{
+    -fx-border-color: black ;
+    -fx-border-width: 0.2px ;
+    -fx-opacity: 1;
+    -fx-background-color: #b69e62;
+}
+
+.loginlabel, .loginfield
+{
+    -fx-font-size: 15px ;
+}
+
+.loginfield
+{
+    -fx-font-weight: bold ;
+}
+
+#forgetpassword
+{
+    -fx-text-fill : rgb(151, 9, 9) ;
+}
+
+#inscribe
+{
+    -fx-text-fill : rgb(4, 58, 4) ;
+}
+
+#inscribe:hover, #forgetpassword:hover
+{
+    -fx-font-size: 12px ;
+    -fx-font-weight: bold ;
+}
