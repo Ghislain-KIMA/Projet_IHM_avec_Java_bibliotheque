@@ -35,7 +35,7 @@ public class Inscribe extends VBox
         ((Label) choice.getChildren().get(0)).setOnMouseClicked((event) ->
         {
             this.getChildren().remove(0) ;
-            this.getChildren().add((StackPane) defineConfig("Entrez le numéro de votre carte d'accès")) ;
+            this.getChildren().add((StackPane) defineConfig("Entrez votre numéro de carte d'accès")) ;
         }) ;
         ((Label) choice.getChildren().get(1)).setOnMouseClicked((event) ->
         {

@@ -149,6 +149,13 @@ public class Login extends HBox
         {
             System.out.println("MOT DE PASSE OUBLIER") ;
         }) ;
+        connexionButton.setOnAction((event) ->
+        {
+            HBox hbox = new UserBoard() ;
+            HBox.setHgrow(hbox, Priority.ALWAYS);
+            this.getChildren().clear() ;
+            this.getChildren().add(hbox) ;
+        });
         /* Event */
 
         return userLogin ;

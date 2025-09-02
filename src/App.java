@@ -16,8 +16,8 @@ public class App extends Application
 
         mainStage.setScene(root.getMainLoginHboxScene()) ;
         mainStage.setTitle("Bibliotheque VIP") ;
-        mainStage.setMinHeight(550);
-        mainStage.setMinWidth(400);
+        mainStage.setMinHeight(550) ;
+        mainStage.setMinWidth(400) ;
         mainStage.setMaximized(true) ;
         mainStage.show() ;
     }
