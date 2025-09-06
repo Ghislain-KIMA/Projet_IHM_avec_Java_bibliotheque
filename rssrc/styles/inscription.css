@@ -1,8 +1,15 @@
-.choicelabel
+.inscriptionchoice
 {
     -fx-background-color: #b69e62;
     -fx-border-color: black ;
     -fx-border-radius: 10px ;
+    -fx-background-radius: 10px ;
     -fx-font-size: 25px ;
     -fx-border-width: 0.2px ;
+    -fx-padding: 10px ;
+}
+
+.inscriptionchoice:hover
+{
+    -fx-font-weight: bold ;
 }

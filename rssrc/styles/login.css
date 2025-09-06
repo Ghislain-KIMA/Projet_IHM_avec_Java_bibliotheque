@@ -3,19 +3,26 @@
     -fx-background-color: #ddd3ba;
 }
 
-.userloginshadow
+#lelftvbox
+{
+    -fx-border-color: black;
+    /* -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
+    -fx-opacity: 1 ; */
+}
+
+.userentreeboardshadow
 {
     -fx-background-color: white ;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
 }
 
-.userlogin, .userloginshadow
+.userentreeboard, .userentreeboardshadow
 {
     -fx-background-radius: 10px ;
     -fx-border-radius: 10px ;
 }
 
-.userlogin
+.userentreeboard
 {
     -fx-border-color: black ;
     -fx-border-width: 0.2px ;
@@ -23,12 +30,12 @@
     -fx-background-color: #b69e62;
 }
 
-.loginlabel, .loginfield
+.identifylabel, .identifyfield
 {
     -fx-font-size: 15px ;
 }
 
-.loginfield
+.identifyfield
 {
     -fx-font-weight: bold ;
 }
@@ -47,4 +54,17 @@
 {
     -fx-font-size: 12px ;
     -fx-font-weight: bold ;
+}
+
+#returnbutton
+{
+    -fx-background-color: #ddd3ba ;
+    -fx-text-fill: #836d35 ;
+    -fx-font-size: 20px ;
+}
+
+#returnbutton:hover
+{
+    -fx-font-weight: bold ;
+    -fx-text-fill: #5c4712 ;
 }

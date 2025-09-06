@@ -1,4 +1,4 @@
-import platfrom.Login ;
+import platfrom.Launching ;
 
 import javafx.application.Application ;
 import javafx.stage.Stage ;
@@ -12,11 +12,10 @@ public class App extends Application
 
     public void start(Stage mainStage) throws Exception
     {
-        Login root = new Login() ;
-
-        mainStage.setScene(root.getMainLoginHboxScene()) ;
+        Launching root = new Launching() ;
+        mainStage.setScene(root.getMainScene()) ;
         mainStage.setTitle("Bibliotheque VIP") ;
-        mainStage.setMinHeight(550) ;
+        mainStage.setMinHeight(600) ;
         mainStage.setMinWidth(400) ;
         mainStage.setMaximized(true) ;
         mainStage.show() ;
