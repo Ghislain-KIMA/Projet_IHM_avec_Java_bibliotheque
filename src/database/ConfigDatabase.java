@@ -4,10 +4,10 @@ import java.nio.file.Path;
 
 public class ConfigDatabase
 {
-    private Path dbFilePath ;
+    // private Path dbFilePath ;
     
     public ConfigDatabase(Path dbFilePath)
     {
-        this.dbFilePath = dbFilePath ;
+        // this.dbFilePath = dbFilePath ;
     }
 }
