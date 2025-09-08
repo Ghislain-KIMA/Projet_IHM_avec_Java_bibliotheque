@@ -1,6 +1,7 @@
 package platfrom;
 
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,7 +13,7 @@ public class Login extends HBox
     private Inscription inscription ;
     private Button lastButton ;
 
-    public Login()
+    public Login(Scene mainScene)
     {
         this.presentation = new Presentation("rssrc/images/image_1.png") ;
         this.identifier = new Identifier() ;
@@ -22,6 +23,26 @@ public class Login extends HBox
         this.identifier.getLabelInscribe().setOnMouseClicked((event) -> { switchIdentifierToInscription(true) ; });
         inscription.getStandardButtonSaving().setOnAction((event) -> { savingAction() ; });
         inscription.getManagerButtonSaving().setOnAction((event) -> { savingAction() ; });
+
+
+
+        mainScene.widthProperty().addListener((obs, oldVal, newVal) ->
+        {
+            double w = newVal.doubleValue() ;
+
+            if (w<500)
+            {
+                this.getChildren().remove(presentation) ;
+                ((VBox) this.getChildren().get(0)).setPrefWidth(w) ;
+            }
+            else
+            {
+                if (!this.getChildren().contains(presentation))
+                    { this.getChildren().addFirst(presentation) ; }
+                presentation.setPrefWidth(w*0.4) ;
+                ((VBox) this.getChildren().get(1)).setPrefWidth(w*0.6) ;
+            }
+        });
 
         /* À SUPPRIMER */
         this.presentation.setStyle("-fx-border-color: black;") ;

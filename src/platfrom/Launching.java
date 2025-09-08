@@ -5,7 +5,7 @@ import javafx.scene.Scene ;
 
 public class Launching extends HBox
 {
-    private Scene maiScene ;
+    private Scene mainScene ;
 
     private Login login ;
     private StandardBoard standardBoard ;
@@ -13,9 +13,9 @@ public class Launching extends HBox
     public Launching()
     {
         super() ;
-        this.maiScene = new Scene(this) ;
-        this.login = new Login() ;
-        this.standardBoard = new StandardBoard() ;
+        this.mainScene = new Scene(this) ;
+        this.login = new Login(this.mainScene) ;
+        this.standardBoard = new StandardBoard(this.mainScene) ;
         
         this.getChildren().add(this.login) ;
         
@@ -31,5 +31,5 @@ public class Launching extends HBox
     }
 
     public Scene getMainScene()
-        { return this.maiScene ; }
+        { return this.mainScene ; }
 }

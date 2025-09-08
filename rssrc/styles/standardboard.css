@@ -1,0 +1,37 @@
+.navicones:hover
+{
+    -fx-cursor: hand ;
+}
+
+.navlabel
+{
+    -fx-font-weight: bold ;
+    /* -fx-text-fill: red ; */
+}
+
+#navigation
+{
+    -fx-background-color: #b69e62 ;
+}
+
+.navallitems
+{
+    -fx-border-radius: 10px ;
+    -fx-background-radius: 10px ;
+    -fx-opacity: 1 ;
+}
+
+.navallitems:hover
+{
+    /* -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);     */
+}
+
+.navigationshadow
+{
+    /* -fx-background-color: white ; */
+}
+
+#secondnav
+{
+    -fx-background-color: #b69e627c ;
+}
