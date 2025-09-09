@@ -31,6 +31,9 @@ public class Identifier extends VBox
 
     private Parent builIdentifierEntreeBoard()
     {
+        int connectionWidth = 320 ;
+        int connectionHeight = 400 ;
+
         VBox identifying = (VBox) labelNameAndTextField("Entrez votre identfiant") ;
         VBox password = (VBox) labelNameAndPasswordField("Mot de passe") ;
         Label loginError = new Label() ;
@@ -46,8 +49,9 @@ public class Identifier extends VBox
         VBox entreeBoard = new VBox(15, identifying, password, loginError, remindFOrgetPassword, connexionButton, firstLaunch) ;
         entreeBoard.setAlignment(Pos.CENTER);
         entreeBoard.setPadding(new Insets(30, 10, 30, 10));
-            
+        
         StackPane stackPane = new StackPane(new VBox(), entreeBoard) ;
+        stackPane.setMaxSize(connectionWidth, connectionHeight);
             /* CSS Style */
         identifying.getChildren().get(0).getStyleClass().add("identifylabel") ;
         password.getChildren().get(0).getStyleClass().add("identifylabel") ;

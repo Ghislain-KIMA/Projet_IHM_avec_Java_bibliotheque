@@ -14,7 +14,7 @@ public class Presentation extends VBox
 
     private ImageView buildPresentationImageView()
     {
-        ImageView imageView = new ImageView(new Image("file:rssrc/images/facebook.png")) ;
+        ImageView imageView = new ImageView(new Image("file:rssrc/images/faceb.png")) ;
         return imageView ;
     }
 }

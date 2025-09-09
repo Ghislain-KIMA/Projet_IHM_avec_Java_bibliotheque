@@ -1,4 +1,4 @@
-package platfrom;
+package platfrom ;
 
 import javafx.geometry.Insets ;
 import javafx.geometry.Pos ;
@@ -27,26 +27,15 @@ public class StandardBoard extends HBox
         
         this.getChildren().addAll(navigation, board) ;
         HBox.setHgrow(board, Priority.ALWAYS) ;
-        board.setAlignment(Pos.CENTER_LEFT) ;
-        
-        // board.setFillWidth(true) ;
-        
-        
+        board.setAlignment(Pos.CENTER_LEFT) ;              
 
         mainScene.widthProperty().addListener((obs, oldVal, newVal) ->
         {
             double w = newVal.doubleValue() ;
             board.setPrefWidth(w);
-        });
-
-        /* À SUPPRIMER */
-        navigation.setStyle(("-fx-border-color: red;")) ;
-        board.setStyle(("-fx-border-color: yellow; -fx-border-width: 2px;")) ;
-        ((VBox)board.getChildren().get(0)).setStyle(("-fx-border-color: black;")) ;
-        /* À SUPPRIMER */
+        }) ;
 
         /* CSS Style */
-        navigation.setId("navigation") ;
         this.getStylesheets().add("file:rssrc/styles/standardboard.css") ;
         /* CSS Style */
     }
@@ -57,8 +46,6 @@ public class StandardBoard extends HBox
 
         VBox secondNav = (VBox) buildSecondNav() ;
         VBox pdfView = (VBox) buildPdfView() ;
-
-        secondNav.setId("secondnav") ;
         
         hbox.getChildren().addAll(secondNav, pdfView) ;
         return hbox ;
@@ -69,38 +56,68 @@ public class StandardBoard extends HBox
         int iconeSize = 48 ;
 
         VBox vbox = new VBox(10) ;
-        VBox borrowBook = new VBox(new ImageView(new Image("file:rssrc/images/emprunter_livre.png")), new Label("Emprunter")) ;
-        VBox searchBook = new VBox(new ImageView(new Image("file:rssrc/images/rechercher_livre.png")), new Label("Rechercher")) ;
-        VBox addBook = new VBox(new ImageView(new Image("file:rssrc/images/ajouter_livre.png")), new Label("Ajouter")) ;
-        VBox removeBook = new VBox(new ImageView(new Image("file:rssrc/images/supprimer_livre.png")), new Label("Supprimer")) ;
-        VBox manageBorrowing = new VBox(new ImageView(new Image("file:rssrc/images/gerer_emprunt.png")), new Label("Gérer")) ;
+        StackPane borrowBook = new StackPane(new VBox(), new VBox(new ImageView(new Image("file:rssrc/images/emprunter_livre.png")), new Label("Emprunter"))) ;
+        StackPane searchBook = new StackPane(new VBox(), new VBox(new ImageView(new Image("file:rssrc/images/rechercher_livre.png")), new Label("Rechercher"))) ;
+        StackPane addBook = new StackPane(new VBox(), new VBox(new ImageView(new Image("file:rssrc/images/ajouter_livre.png")), new Label("Ajouter"))) ;
+        StackPane removeBook = new StackPane(new VBox(), new VBox(new ImageView(new Image("file:rssrc/images/supprimer_livre.png")), new Label("Supprimer"))) ;
+        StackPane manageBorrowing = new StackPane(new VBox(), new VBox(new ImageView(new Image("file:rssrc/images/gerer_emprunt.png")), new Label("Gérer"))) ;
         
-        ((ImageView) borrowBook.getChildren().get(0)).setFitWidth(iconeSize) ;
-        ((ImageView) borrowBook.getChildren().get(0)).setFitHeight(iconeSize) ;
-        ((ImageView) searchBook.getChildren().get(0)).setFitWidth(iconeSize) ;
-        ((ImageView) searchBook.getChildren().get(0)).setFitHeight(iconeSize) ;
-        ((ImageView) addBook.getChildren().get(0)).setFitWidth(iconeSize) ;
-        ((ImageView) addBook.getChildren().get(0)).setFitHeight(iconeSize) ;
-        ((ImageView) removeBook.getChildren().get(0)).setFitWidth(iconeSize) ;
-        ((ImageView) removeBook.getChildren().get(0)).setFitHeight(iconeSize) ;
-        ((ImageView) manageBorrowing.getChildren().get(0)).setFitWidth(iconeSize) ;
-        ((ImageView) manageBorrowing.getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((VBox) borrowBook.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((VBox) borrowBook.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((VBox) searchBook.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((VBox) searchBook.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((VBox) addBook.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((VBox) addBook.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((VBox) removeBook.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((VBox) removeBook.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((VBox) manageBorrowing.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((VBox) manageBorrowing.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
 
-        /* À SUPPRIMER */
-        borrowBook.setStyle("-fx-border-color: black") ;
-        searchBook.setStyle("-fx-border-color: black") ;
-        addBook.setStyle("-fx-border-color: black") ;
-        removeBook.setStyle("-fx-border-color: black") ;
-        manageBorrowing.setStyle("-fx-border-color: black") ;
-        /* À SUPPRIMER */
+        navAllItemsShadowAction((VBox) borrowBook.getChildren().get(0), (VBox) borrowBook.getChildren().get(1)) ;
+        navAllItemsShadowAction((VBox) searchBook.getChildren().get(0), (VBox) searchBook.getChildren().get(1)) ;
+        navAllItemsShadowAction((VBox) addBook.getChildren().get(0), (VBox) addBook.getChildren().get(1)) ;
+        navAllItemsShadowAction((VBox) removeBook.getChildren().get(0), (VBox) removeBook.getChildren().get(1)) ;
+        navAllItemsShadowAction((VBox) manageBorrowing.getChildren().get(0), (VBox) manageBorrowing.getChildren().get(1)) ;
 
+        ((VBox) borrowBook.getChildren().get(1)).setPadding(new Insets(5)) ;
+        ((VBox) searchBook.getChildren().get(1)).setPadding(new Insets(5)) ;
+        ((VBox) addBook.getChildren().get(1)).setPadding(new Insets(5)) ;
+        ((VBox) removeBook.getChildren().get(1)).setPadding(new Insets(5)) ;
+        ((VBox) manageBorrowing.getChildren().get(1)).setPadding(new Insets(5)) ;
+
+        ((VBox) borrowBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
+        ((VBox) searchBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
+        ((VBox) addBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
+        ((VBox) removeBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
+        ((VBox) manageBorrowing.getChildren().get(1)).setAlignment(Pos.CENTER); ;
+        
         Region spacer1 = new Region() ;
         Region spacer2 = new Region() ;
         VBox.setVgrow(spacer1, Priority.ALWAYS) ;
         VBox.setVgrow(spacer2, Priority.ALWAYS);
 
         vbox.getChildren().addAll(searchBook, borrowBook, spacer1, addBook, removeBook, manageBorrowing, spacer2) ;
-        vbox.setPadding(new Insets(10, 2, 10, 5)) ;
+        vbox.setPadding(new Insets(10, 5, 10, 5)) ;
+
+        /* CSS Style */
+        vbox.setId("secondnav") ;
+        borrowBook.getStyleClass().add("navallitems") ;
+        searchBook.getStyleClass().add("navallitems") ;
+        addBook.getStyleClass().add("navallitems") ;
+        removeBook.getStyleClass().add("navallitems") ;
+        manageBorrowing.getStyleClass().add("navallitems") ;
+        ((VBox) borrowBook.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((VBox) searchBook.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((VBox) addBook.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((VBox) removeBook.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((VBox) manageBorrowing.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((VBox) borrowBook.getChildren().get(1)).getStyleClass().add("secondnavitems");
+        ((VBox) searchBook.getChildren().get(1)).getStyleClass().add("secondnavitems");
+        ((VBox) addBook.getChildren().get(1)).getStyleClass().add("secondnavitems");
+        ((VBox) removeBook.getChildren().get(1)).getStyleClass().add("secondnavitems");
+        ((VBox) manageBorrowing.getChildren().get(1)).getStyleClass().add("secondnavitems");
+        /* CSS Style */
+
         return vbox ;
     }
 
@@ -113,11 +130,10 @@ public class StandardBoard extends HBox
 
         VBox vbox = new VBox(new HBox(r, new Label("VIEWER"), r1)) ;
 
-
         vbox.setAlignment(Pos.CENTER) ;
 
         /* À SUPPRIMER */
-        vbox.setStyle("-fx-border-color: black") ;
+        // vbox.setStyle("-fx-border-color: black") ;
         /* À SUPPRIMER */
 
         return vbox ;
@@ -126,54 +142,28 @@ public class StandardBoard extends HBox
     private Parent buildNavigation()
     {
         VBox navigation = new VBox(10) ;
-        StackPane profile = new StackPane(new HBox(), (HBox) navigationTopItem("rssrc/images/profile.png", "Profile")) ;
-        ((HBox) profile.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
-        StackPane settings = new StackPane(new HBox(), (HBox) navigationTopItem("rssrc/images/settings.png", "Settings")) ;
-        ((HBox) settings.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
-
-        ((HBox) profile.getChildren().get(1)).hoverProperty().addListener((obs, oldVal, isHovered) ->
-        {
-            System.out.println("STACKPANE") ;
-            if (isHovered)
-            {
-                DropShadow shadow = new DropShadow() ;
-                shadow.setRadius(10) ;
-                shadow.setOffsetX(0) ;
-                shadow.setOffsetY(5) ;
-                shadow.setColor(Color.BLACK) ;
-                ((HBox) profile.getChildren().get(0)).setEffect(shadow) ;
-                ((HBox) profile.getChildren().get(0)).setStyle("-fx-background-color: red;") ;
-            }
-            else
-            {
-                ((HBox) profile.getChildren().get(0)).setEffect(null) ;
-            }
-        });
-
+        StackPane profile = (StackPane) navigationTopItem("rssrc/images/profile.png", "Profile") ;
+        StackPane settings = (StackPane) navigationTopItem("rssrc/images/settings.png", "Settings") ;
 
         Region spacer = new Region() ;
         VBox.setVgrow(spacer, Priority.ALWAYS) ;
         HBox resseaux = (HBox) defineSocialReseaux() ;
-        HBox quitter = new HBox(new Label("Exit".toUpperCase())) ;
-        quitter.setAlignment(Pos.CENTER) ;
-        quitter.setPadding(new Insets(5));
+        StackPane quitter = new StackPane(new HBox(), new HBox(new Label("Exit".toUpperCase()))) ;
+        ((HBox) quitter.getChildren().get(1)).setAlignment(Pos.CENTER) ;
+        ((HBox) quitter.getChildren().get(1)).setPadding(new Insets(5));
         
         navigation.getChildren().addAll(profile, settings, spacer, resseaux, quitter) ;
         navigation.setMinWidth(200) ;
         navigation.setMaxWidth(200) ;
         navigation.setPadding(new Insets(10)) ;
-        
-        /* À SUPPRIMER */
-        // profile.setAlignment(Pos.CENTER) ;
-        // settings.setAlignment(Pos.CENTER) ;
-        // resseaux.setAlignment(Pos.CENTER) ;
-        // quitter.setAlignment(Pos.CENTER) ;
-        quitter.setStyle("-fx-border-color: black;") ;
-        /* À SUPPRIMER */
+
+        navAllItemsShadowAction((HBox) quitter.getChildren().get(0), (HBox) quitter.getChildren().get(1)) ;
 
         /* CSS Style */
-        quitter.getStyleClass().add("navallitems") ;
-        quitter.getStyleClass().add("navlabel") ;
+        navigation.setId("navigation") ;
+        ((HBox) quitter.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((HBox) quitter.getChildren().get(1)).getStyleClass().add("navallitems") ;
+        ((HBox) quitter.getChildren().get(1)).getStyleClass().add("navlabel") ;
         /* CSS Style */
 
         return navigation ;
@@ -182,8 +172,8 @@ public class StandardBoard extends HBox
     private Parent navigationTopItem(String iconePath, String labelString)
     {
         int iconeSize = 48 ;
+
         HBox hbox = new HBox(10) ;
-        
         ImageView icone = new ImageView(new Image("file:" + iconePath)) ;
         icone.setFitWidth(iconeSize) ;
         icone.setFitHeight(iconeSize) ;
@@ -191,36 +181,59 @@ public class StandardBoard extends HBox
         hbox.getChildren().addAll(new StackPane(icone), label) ;
         hbox.setAlignment(Pos.CENTER_LEFT) ;
         hbox.setPadding(new Insets(5)) ;
+        
+        StackPane stackPane = new StackPane(new HBox(), hbox) ;
+        ((HBox) stackPane.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
 
-        /* À SUPPRIMER */
-        hbox.getChildren().get(0).setStyle("-fx-border-color: black;") ;
-        hbox.setStyle("-fx-border-color: black;") ;
-        // label.setStyle("-fx-border-color: black;") ;
-        /* À SUPPRIMER */
+        navAllItemsShadowAction(((HBox) stackPane.getChildren().get(0)), (HBox) stackPane.getChildren().get(1)) ;
 
         /* CSS Style */
-        hbox.getChildren().get(0).getStyleClass().add("navicones".toLowerCase()) ;
         label.getStyleClass().add("navlabel") ;
         hbox.getStyleClass().add("navallitems") ;
         /* CSS Style */
 
-        return hbox ;
+        return stackPane ;
+    }
+
+    private void navAllItemsShadowAction(Parent effect, Parent action)
+    {
+        action.hoverProperty().addListener((obs, oldVal, isHovered) ->
+        {
+            if (isHovered)
+            {
+                DropShadow shadow = new DropShadow() ;
+                shadow.setRadius(0) ;
+                shadow.setOffsetX(2) ;
+                shadow.setOffsetY(2) ;
+                shadow.setColor(Color.BLACK) ;
+                effect.setEffect(shadow) ;
+                effect.setStyle("-fx-background-color: #b69e62;") ;
+            }
+            else
+            { effect.setEffect(null) ; }
+        });
     }
 
     private Parent defineSocialReseaux()
     {
         int iconeSize = 24 ;
+        int iconePadding = 5 ;
 
         HBox hbox = new HBox(10) ;
-        ImageView facebook = new ImageView(new Image("file:rssrc/images/facebook.png")) ;
-        ImageView instagram = new ImageView(new Image("file:rssrc/images/instagram.png")) ;
-        ImageView youtube = new ImageView(new Image("file:rssrc/images/youtube.png")) ;
-        facebook.setFitWidth(iconeSize) ;
-        facebook.setFitHeight(iconeSize) ;
-        instagram.setFitWidth(iconeSize) ;
-        instagram.setFitHeight(iconeSize) ;
-        youtube.setFitWidth(iconeSize) ;
-        youtube.setFitHeight(iconeSize) ;
+        StackPane facebook = new StackPane(new HBox(), new HBox(new ImageView(new Image("file:rssrc/images/facebook.png")))) ;
+        StackPane instagram = new StackPane(new HBox(), new HBox(new ImageView(new Image("file:rssrc/images/instagram.png")))) ;
+        StackPane youtube = new StackPane(new HBox(), new HBox(new ImageView(new Image("file:rssrc/images/youtube.png")))) ;
+        
+        ((ImageView) ((HBox) facebook.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((HBox) facebook.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((HBox) instagram.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((HBox) instagram.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        ((ImageView) ((HBox) youtube.getChildren().get(1)).getChildren().get(0)).setFitWidth(iconeSize) ;
+        ((ImageView) ((HBox) youtube.getChildren().get(1)).getChildren().get(0)).setFitHeight(iconeSize) ;
+        
+        navAllItemsShadowAction(((HBox) facebook.getChildren().get(0)), ((HBox) facebook.getChildren().get(1))) ;
+        navAllItemsShadowAction(((HBox) instagram.getChildren().get(0)), ((HBox) instagram.getChildren().get(1))) ;
+        navAllItemsShadowAction(((HBox) youtube.getChildren().get(0)), ((HBox) youtube.getChildren().get(1))) ;
 
         Region begin = new Region() ;
         Region end = new Region() ;
@@ -233,17 +246,19 @@ public class StandardBoard extends HBox
 
         hbox.setPadding(new Insets(5)) ;
         hbox.getChildren().addAll(begin, facebook, spacerLeft, instagram, spacerRight, youtube, end) ;
+        
+        ((HBox) facebook.getChildren().get(1)).setPadding(new Insets(iconePadding)) ;
+        ((HBox) instagram.getChildren().get(1)).setPadding(new Insets(iconePadding)) ;
+        ((HBox) youtube.getChildren().get(1)).setPadding(new Insets(iconePadding)) ;
 
         /* CSS Style */
-        facebook.getStyleClass().add("navicones") ;
-        instagram.getStyleClass().add("navicones") ;
-        youtube.getStyleClass().add("navicones") ;
-        hbox.getStyleClass().add("navallitems") ;
+        ((HBox) facebook.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((HBox) instagram.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((HBox) youtube.getChildren().get(0)).getStyleClass().add("navigationshadow") ;
+        ((HBox) facebook.getChildren().get(1)).getStyleClass().add("navallitems") ;
+        ((HBox) instagram.getChildren().get(1)).getStyleClass().add("navallitems") ;
+        ((HBox) youtube.getChildren().get(1)).getStyleClass().add("navallitems") ;
         /* CSS Style */
-
-        /* À SUPPRIMER */
-        hbox.setStyle("-fx-border-color: black;") ;
-        /* À SUPPRIMER */
 
         return hbox ;
     }

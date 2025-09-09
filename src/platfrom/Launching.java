@@ -31,5 +31,5 @@ public class Launching extends HBox
     }
 
     public Scene getMainScene()
-        { return this.mainScene ; }
+    { return this.mainScene ; }
 }

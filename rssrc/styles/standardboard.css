@@ -1,4 +1,4 @@
-.navicones:hover
+.navallitems:hover
 {
     -fx-cursor: hand ;
 }
@@ -17,6 +17,8 @@
 .navallitems
 {
     -fx-border-radius: 10px ;
+    -fx-border-color: white ;
+    -fx-border-width: 0.5px ;
     -fx-background-radius: 10px ;
     -fx-opacity: 1 ;
 }
@@ -28,10 +30,25 @@
 
 .navigationshadow
 {
-    /* -fx-background-color: white ; */
+    -fx-background-radius: 10px ;
+    -fx-border-radius: 10px ;
 }
 
 #secondnav
 {
     -fx-background-color: #b69e627c ;
 }
+
+.secondnavitems
+{
+    -fx-background-color: red ;
+    -fx-background-radius: 10px ;
+    -fx-background-color: #b69e62;
+}
+
+/* .resseauxsocialitems
+{
+    -fx-border-color: white ;
+    -fx-border-radius: 5px ;
+    -fx-border-width: 0.5px ;
+} */
