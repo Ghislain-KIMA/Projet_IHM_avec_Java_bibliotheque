@@ -9,6 +9,11 @@
     -fx-padding: 10px ;
 }
 
+.actionbuttonshand:hover
+{
+    -fx-cursor: hand ;
+}
+
 .inscriptionchoice:hover
 {
     -fx-font-weight: bold ;

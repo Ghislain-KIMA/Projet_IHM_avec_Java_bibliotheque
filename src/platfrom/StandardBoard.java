@@ -1,19 +1,22 @@
 package platfrom ;
 
+import javafx.application.Platform ;
 import javafx.geometry.Insets ;
 import javafx.geometry.Pos ;
 import javafx.scene.Parent ;
 import javafx.scene.Scene ;
+import javafx.scene.control.Alert ;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label ;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
+import javafx.scene.image.Image ;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox ;
 import javafx.scene.layout.Priority ;
 import javafx.scene.layout.Region ;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;
-import javafx.scene.paint.Color;
+import javafx.scene.paint.Color ;
 
 public class StandardBoard extends HBox
 {
@@ -85,11 +88,11 @@ public class StandardBoard extends HBox
         ((VBox) removeBook.getChildren().get(1)).setPadding(new Insets(5)) ;
         ((VBox) manageBorrowing.getChildren().get(1)).setPadding(new Insets(5)) ;
 
-        ((VBox) borrowBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
-        ((VBox) searchBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
-        ((VBox) addBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
-        ((VBox) removeBook.getChildren().get(1)).setAlignment(Pos.CENTER); ;
-        ((VBox) manageBorrowing.getChildren().get(1)).setAlignment(Pos.CENTER); ;
+        ((VBox) borrowBook.getChildren().get(1)).setAlignment(Pos.CENTER) ;
+        ((VBox) searchBook.getChildren().get(1)).setAlignment(Pos.CENTER) ;
+        ((VBox) addBook.getChildren().get(1)).setAlignment(Pos.CENTER) ;
+        ((VBox) removeBook.getChildren().get(1)).setAlignment(Pos.CENTER) ;
+        ((VBox) manageBorrowing.getChildren().get(1)).setAlignment(Pos.CENTER) ;
         
         Region spacer1 = new Region() ;
         Region spacer2 = new Region() ;
@@ -132,10 +135,6 @@ public class StandardBoard extends HBox
 
         vbox.setAlignment(Pos.CENTER) ;
 
-        /* À SUPPRIMER */
-        // vbox.setStyle("-fx-border-color: black") ;
-        /* À SUPPRIMER */
-
         return vbox ;
     }
 
@@ -149,6 +148,16 @@ public class StandardBoard extends HBox
         VBox.setVgrow(spacer, Priority.ALWAYS) ;
         HBox resseaux = (HBox) defineSocialReseaux() ;
         StackPane quitter = new StackPane(new HBox(), new HBox(new Label("Exit".toUpperCase()))) ;
+        ((HBox) quitter.getChildren().get(1)).setOnMouseClicked((event) ->
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Voullez-vous vraiment quitter ?", ButtonType.YES, ButtonType.NO) ;
+            alert.setHeaderText(null) ;
+            alert.showAndWait().ifPresent(response ->
+            {
+                if (response == ButtonType.YES)
+                { Platform.exit();}
+            });
+        }) ;
         ((HBox) quitter.getChildren().get(1)).setAlignment(Pos.CENTER) ;
         ((HBox) quitter.getChildren().get(1)).setPadding(new Insets(5));
         

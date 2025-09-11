@@ -1,5 +1,7 @@
 package platfrom ;
 
+import java.util.HashMap;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -17,16 +19,16 @@ import javafx.scene.layout.VBox ;
 public class Identifier extends VBox
 {
     private Label labelInscribe ;
-    private Button connexionButton ;
+    private Button connectionButton ;
+    private TextField userId ;
+    private PasswordField userPassword ;
+
+    private Label loginError ;
 
     public Identifier()
     {
         this.getChildren().add((StackPane) builIdentifierEntreeBoard()) ;
         this.setAlignment(Pos.CENTER) ;
-
-            /* CSS Style */
-        this.getStylesheets().add("file:rssrc/styles/login.css") ;
-            /* CSS Style */
     }
 
     private Parent builIdentifierEntreeBoard()
@@ -36,28 +38,34 @@ public class Identifier extends VBox
 
         VBox identifying = (VBox) labelNameAndTextField("Entrez votre identfiant") ;
         VBox password = (VBox) labelNameAndPasswordField("Mot de passe") ;
-        Label loginError = new Label() ;
+        this.userId = (TextField) identifying.getChildren().get(1) ;
+        this.userPassword = (PasswordField) password.getChildren().get(1) ;
+        loginError = new Label("Vos informations sont invalides") ;
+        loginError.setId("loginerror") ;
+        loginError.setVisible(false) ;
         Region hSpacer1 = new Region() ;
         Region hSpacer2 = new Region() ;
         HBox.setHgrow(hSpacer1, Priority.ALWAYS);
         HBox.setHgrow(hSpacer2, Priority.ALWAYS);
-        HBox remindFOrgetPassword = new HBox(new CheckBox("Se souvenir de moi"), hSpacer1, new Label("Mot de passe oublié ?")) ;
-        connexionButton = new Button("Se connecter".toUpperCase()) ;
+        HBox remindFOrgetPassword = new HBox(5, new CheckBox(), new Label("Se souvenir de moi"), hSpacer1, new Label("Mot de passe oublié ?")) ;
+        remindFOrgetPassword.getChildren().get(0).setId("sesouvenirdemoi");
+        connectionButton = new Button("Se connecter".toUpperCase()) ;
         labelInscribe = new Label("S'inscrire") ;
         HBox firstLaunch = new HBox(new Label("Vous n'avez pas de compte ?"), hSpacer2, labelInscribe) ;
         
-        VBox entreeBoard = new VBox(15, identifying, password, loginError, remindFOrgetPassword, connexionButton, firstLaunch) ;
+        VBox entreeBoard = new VBox(15, identifying, password, loginError, remindFOrgetPassword, connectionButton, firstLaunch) ;
         entreeBoard.setAlignment(Pos.CENTER);
         entreeBoard.setPadding(new Insets(30, 10, 30, 10));
         
         StackPane stackPane = new StackPane(new VBox(), entreeBoard) ;
         stackPane.setMaxSize(connectionWidth, connectionHeight);
             /* CSS Style */
+        this.connectionButton.getStyleClass().add("connectionbutton");
         identifying.getChildren().get(0).getStyleClass().add("identifylabel") ;
         password.getChildren().get(0).getStyleClass().add("identifylabel") ;
         identifying.getChildren().get(1).getStyleClass().add("identifyfield") ;
         password.getChildren().get(1).getStyleClass().add("identifyfield") ;
-        remindFOrgetPassword.getChildren().get(2).setId("forgetpassword") ;
+        remindFOrgetPassword.getChildren().get(3).setId("forgetpassword") ;
         firstLaunch.getChildren().get(2).setId("inscribe") ;
         ((VBox) stackPane.getChildren().get(0)).getStyleClass().add("userentreeboardshadow") ;
         ((VBox) stackPane.getChildren().get(1)).getStyleClass().add("userentreeboard") ;
@@ -65,17 +73,28 @@ public class Identifier extends VBox
         return stackPane ;
     }
 
-    public Label getLabelInscribe()
-    { return labelInscribe ; }
+    public Button getConnectionButton()
+    {   return this.connectionButton ;  }
 
-    public Button getButtonConnection()
+    public HashMap<String, String> getIdentificationInfos()
     {
-        return this.connexionButton ;   
+        HashMap<String, String> infos = new HashMap<>() ;
+        infos.put("userId", this.userId.getText()) ;
+        infos.put("userPassword", this.userPassword.getText()) ;
+        return infos ;
     }
 
+    public Label getLoginErrorLabel()
+    {
+        return this.loginError ;
+    }
+
+    public Label getLabelInscribe()
+    {   return labelInscribe ;  }
+
     public static Parent labelNameAndTextField(String name)
-    { return new VBox(5, new Label(name), new TextField()) ; }
+    {   return new VBox(5, new Label(name), new TextField()) ;  }
 
     public static Parent labelNameAndPasswordField(String name)
-    { return new VBox(5, new Label(name), new PasswordField()) ; }
+    {   return new VBox(5, new Label(name), new PasswordField()) ;  }
 }

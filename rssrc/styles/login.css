@@ -3,12 +3,10 @@
     -fx-background-color: #ddd3ba;
 }
 
-#lelftvbox
+/* #lelftvbox
 {
     -fx-border-color: black;
-    /* -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
-    -fx-opacity: 1 ; */
-}
+} */
 
 .userentreeboardshadow
 {
@@ -50,21 +48,46 @@
     -fx-text-fill : rgb(4, 58, 4) ;
 }
 
+.connectionbutton
+{
+    -fx-cursor: hand ;
+    -fx-border-radius: 10px ;
+    -fx-background-radius: 10px ;
+    -fx-font-weight : bold ;
+}
+
+.connectionbutton:hover
+{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 2);
+}
+
+#sesouvenirdemoi
+{
+    -fx-cursor: hand ;
+}
+
 #inscribe:hover, #forgetpassword:hover
 {
+    -fx-cursor: hand ;
     -fx-font-size: 12px ;
     -fx-font-weight: bold ;
 }
 
 #returnbutton
 {
-    -fx-background-color: #ddd3ba ;
+    -fx-background-color: none ;
     -fx-text-fill: #836d35 ;
-    -fx-font-size: 20px ;
+    -fx-font-size: 30px ;
 }
 
 #returnbutton:hover
 {
     -fx-font-weight: bold ;
     -fx-text-fill: #5c4712 ;
+}
+
+#loginerror
+{
+    -fx-text-fill: rgb(160, 6, 6) ;
+    -fx-font-weight: bold ;
 }

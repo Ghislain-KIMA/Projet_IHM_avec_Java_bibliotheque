@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -24,18 +26,13 @@ public class Inscription extends VBox
         super() ;
 
         inscriptionChoice = (StackPane) buildInscriptionChoice() ;
-        this.getChildren().add(inscriptionChoice) ;
+
+        this.getChildren().addAll(this.inscriptionChoice) ;
         this.setAlignment(Pos.CENTER) ;
 
         /* CSS Style */
-        this.getStylesheets().add("file:rssrc/styles/login.css") ;
         this.getStylesheets().add("file:rssrc/styles/inscription.css") ;
         /* CSS Style */
-
-        /* À SUPPRIMER */
-        inscriptionChoice.setStyle("-fx-border-color: black;") ;
-        this.setStyle("-fx-border-color: black;") ;
-        /* À SUPPRIMER */
 
         StackPane standard = (StackPane) buildInscriptionEntreeBoard("Entrez votre numéro de carte d'accès") ;
         this.standardSaving = (Button) ((HBox) ((VBox) standard.getChildren().get(1)).getChildren().get(6)).getChildren().get(2) ;
@@ -57,20 +54,27 @@ public class Inscription extends VBox
     private Parent buildInscriptionChoice()
     {
         VBox vbox = new VBox(20, new Label("Utilisateur"), new Label("Gestionnaire")) ;
+        vbox.setAlignment(Pos.CENTER) ;
+
             /* CSS Style */
         vbox.getChildren().get(0).getStyleClass().add("inscriptionchoice") ;
         vbox.getChildren().get(1).getStyleClass().add("inscriptionchoice") ;
         vbox.getChildren().get(0).getStyleClass().add("userentreeboardshadow") ;
         vbox.getChildren().get(1).getStyleClass().add("userentreeboardshadow") ;
             /* CSS Style */
+
         return new StackPane(vbox) ;
     }
 
     private Parent buildInscriptionEntreeBoard(String accessLabel)
     {
+        int inscriptionWidth = 350 ;
+        int inscriptionHeight = 480 ;
+
         StackPane stackPane = new StackPane() ;
 
         VBox inscriptionEntreeBoardShadow = new VBox() ;
+    
         VBox entreeBoard = new VBox(15) ;
 
         VBox lastName = (VBox) Identifier.labelNameAndTextField("Nom") ;
@@ -84,6 +88,21 @@ public class Inscription extends VBox
         entreeBoard.setPadding(new Insets(30, 10, 30, 10));
         entreeBoard.getChildren().addAll(lastName, firstName, accessCarteCode, password, confirmPassword, new Label(""), actions) ;
         stackPane.getChildren().addAll(inscriptionEntreeBoardShadow, entreeBoard) ;
+
+        entreeBoard.setMinSize(inscriptionWidth, inscriptionHeight) ;
+        entreeBoard.setMaxSize(inscriptionWidth, inscriptionHeight) ;
+        inscriptionEntreeBoardShadow.setMinSize(inscriptionWidth, inscriptionHeight);
+        inscriptionEntreeBoardShadow.setMaxSize(inscriptionWidth, inscriptionHeight);
+
+        ((Button) actions.getChildren().get(0)).setOnAction((event) ->
+        {
+            ((TextField) lastName.getChildren().get(1)).clear() ;
+            ((TextField) firstName.getChildren().get(1)).clear() ;
+            ((TextField) accessCarteCode.getChildren().get(1)).clear() ;
+            ((PasswordField) password.getChildren().get(1)).clear() ;
+            ((PasswordField) confirmPassword.getChildren().get(1)).clear() ;
+        }) ;
+
             /* CSS Style */
         lastName.getChildren().get(0).getStyleClass().add("identifylabel") ;
         firstName.getChildren().get(0).getStyleClass().add("identifylabel") ;
@@ -97,24 +116,22 @@ public class Inscription extends VBox
         confirmPassword.getChildren().get(1).getStyleClass().add("identifyfield") ;
         entreeBoard.getStyleClass().add("userentreeboard") ;
         inscriptionEntreeBoardShadow.getStyleClass().add("userentreeboardshadow") ;
+        actions.getChildren().get(0).getStyleClass().add("actionbuttonshand") ;
+        actions.getChildren().get(2).getStyleClass().add("actionbuttonshand") ;
+        actions.getChildren().get(0).getStyleClass().add("connectionbutton") ;
+        actions.getChildren().get(2).getStyleClass().add("connectionbutton") ;
             /* CSS Style */
         return stackPane ;
     }
 
     public Button getStandardButtonSaving()
-    {
-        return this.standardSaving ;
-    }
+    {   return this.standardSaving ;    }
 
     public Button getManagerButtonSaving()
-    {
-        return this.managerSaving ;
-    }
+    {   return this.managerSaving ; }
 
     public boolean inscriptionChoiceIsOccurrence()
-    {
-        return this.getChildren().contains(this.inscriptionChoice) ;
-    }
+    {   return this.getChildren().contains(this.inscriptionChoice) ;    }
     
     public void defaultDefenition()
     {

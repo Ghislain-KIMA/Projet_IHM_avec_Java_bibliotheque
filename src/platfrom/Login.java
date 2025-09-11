@@ -26,9 +26,9 @@ public class Login extends HBox
         this.getChildren().addAll(presentation, (VBox) buildRightVbox()) ;
         this.setAlignment(Pos.CENTER) ;
     
-        this.identifier.getLabelInscribe().setOnMouseClicked((event) -> { switchIdentifierToInscription(true) ; });
-        inscription.getStandardButtonSaving().setOnAction((event) -> { savingAction() ; });
-        inscription.getManagerButtonSaving().setOnAction((event) -> { savingAction() ; });
+        this.identifier.getLabelInscribe().setOnMouseClicked((event) -> { switchIdentifierToInscription(true, (this.getChildren().contains(this.presentation) ? 1 : 0 ) ) ; } );
+        inscription.getStandardButtonSaving().setOnAction((event) -> { savingAction((this.getChildren().contains(this.presentation) ? 1 : 0 )) ; });
+        inscription.getManagerButtonSaving().setOnAction((event) -> { savingAction((this.getChildren().contains(this.presentation) ? 1 : 0 )) ; });
 
         mainScene.widthProperty().addListener((obs, oldVal, newVal) ->
         {
@@ -47,66 +47,30 @@ public class Login extends HBox
                 ((VBox) this.getChildren().get(1)).setPrefWidth(w*0.6) ;
             }
         });
+
+        this.getStylesheets().add("file:rssrc/styles/login.css") ;
     }
 
-    private void savingAction()
+    private void savingAction(int position)
     {
         this.lastButton.setVisible(false) ;
         inscription.defaultDefenition() ;
-        ((VBox) this.getChildren().get(1)).getChildren().remove(1) ;
-        ((VBox) this.getChildren().get(1)).getChildren().add(identifier) ;
+        ((VBox) this.getChildren().get(position)).getChildren().removeAll(this.spacer1, this.inscription, this.spacer2) ;
+        ((VBox) this.getChildren().get(position)).getChildren().addAll(this.spacer1, this.identifier, this.spacer2) ;
     }
 
-    private void switchIdentifierToInscription(boolean visibility)
+    private void switchIdentifierToInscription(boolean visibility, int position)
     {
         this.lastButton.setVisible(visibility) ;
         
-        if (this.getChildren().contains(this.presentation))
-        {
-            if (((VBox) this.getChildren().get(1)).getChildren().contains(this.identifier))
-            {
-                ((VBox) this.getChildren().get(1)).getChildren().remove(this.spacer2) ;
-                ((VBox) this.getChildren().get(1)).getChildren().remove(this.identifier) ;
-                ((VBox) this.getChildren().get(1)).getChildren().remove(this.spacer1) ;
-            }
-
-            if (((VBox) this.getChildren().get(1)).getChildren().contains(this.inscription))
-            {
-                ((VBox) this.getChildren().get(1)).getChildren().remove(this.inscription) ;
-            }
-
-            if (visibility)
-            {
-                ((VBox) this.getChildren().get(1)).getChildren().add(this.inscription) ;
-            }
-            else
-            {
-                ((VBox) this.getChildren().get(1)).getChildren().addAll(this.spacer1, this.identifier, this.spacer2) ;
-            }
-        }
+        if (((VBox) this.getChildren().get(position)).getChildren().contains(this.identifier))
+            {   ((VBox) this.getChildren().get(position)).getChildren().removeAll(this.spacer2, this.identifier, this.spacer1) ;    }
+        if (((VBox) this.getChildren().get(position)).getChildren().contains(this.inscription))
+            {   ((VBox) this.getChildren().get(position)).getChildren().removeAll(this.spacer1, this.inscription, this.spacer2) ;   }
+        if (visibility)
+            {   ((VBox) this.getChildren().get(position)).getChildren().addAll(this.spacer1, this.inscription, this.spacer2) ;  }
         else
-        {
-            if (((VBox) this.getChildren().get(0)).getChildren().contains(this.identifier))
-            {
-                ((VBox) this.getChildren().get(0)).getChildren().remove(this.spacer2) ;
-                ((VBox) this.getChildren().get(0)).getChildren().remove(this.identifier) ;
-                ((VBox) this.getChildren().get(0)).getChildren().remove(this.spacer1) ;
-            }
-
-            if (((VBox) this.getChildren().get(0)).getChildren().contains(this.inscription))
-            {
-                ((VBox) this.getChildren().get(0)).getChildren().remove(this.inscription) ;
-            }
-
-            if (visibility)
-            {
-                ((VBox) this.getChildren().get(0)).getChildren().add(this.inscription) ;
-            }
-            else
-            {
-                ((VBox) this.getChildren().get(0)).getChildren().addAll(this.spacer1, this.identifier, this.spacer2) ;
-            }
-        }
+            {   ((VBox) this.getChildren().get(position)).getChildren().addAll(this.spacer1, this.identifier, this.spacer2) ;   }
     }
 
     private Parent buildRightVbox()
@@ -129,14 +93,15 @@ public class Login extends HBox
             if (!inscription.inscriptionChoiceIsOccurrence())
                 { inscription.defaultDefenition() ; }
             else
-                { switchIdentifierToInscription(false) ; }
+                { switchIdentifierToInscription(false, (this.getChildren().contains(this.presentation) ? 1 : 0 )) ; }
         }) ;
+        /* CSS Style */
+        this.lastButton.setId("returnbutton") ;
+        /* CSS Style */
 
         return vbox ;
     }
 
     public Identifier getIdentifier()
-    {
-        return this.identifier ;
-    }
+    {   return this.identifier ;    }
 }
